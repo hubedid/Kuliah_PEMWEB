@@ -1,0 +1,447 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+
+body {
+  font-family: "Poppins";
+  margin: 0;
+}
+.atas {
+  height: 700px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+.main {
+  position: absolute;
+  top: 750px;
+  width: 100%;
+}
+.bawah {
+  position: absolute;
+  top: 2450px;
+  width: 100%;
+  height: 80px;
+}
+.foto {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+  color: rgb(48, 178, 252);
+}
+p {
+  font-size: 20px;
+}
+td > p {
+  margin: 0;
+}
+b > p {
+  margin: 0;
+}
+h1 {
+  color: rgb(3, 155, 222);
+}
+h2 {
+  color: rgb(48, 178, 252);
+}
+.kotak {
+  width: 90%;
+  height: 500px;
+  border-radius: 23px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+.kotak1 {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+}
+.kotak2 {
+  width: 74%;
+  flex: auto;
+  padding-right: 0px;
+  padding-top: 0px;
+}
+.kotakfoto1 {
+  position: relative;
+  height: 82%;
+  width: 100%;
+}
+.kotakfoto2 {
+  position: absolute;
+  z-index: 5;
+  width: 25%;
+  height: 65%;
+  left: 46%;
+  right: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ovaltengah1 {
+  position: relative;
+  height: 18%;
+  width: 100%;
+}
+.ovaltengah2 {
+  position: absolute;
+  z-index: 5;
+  width: 80%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 200px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+}
+.kotakdalamoval {
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  margin: auto;
+}
+.butonoval {
+  height: 100%;
+  text-align: center;
+}
+.butonoval > h2 {
+  position: relative;
+  top: 45%;
+  margin: 0 auto;
+}
+.butonheader {
+  height: 40px;
+  text-align: center;
+}
+.butonheader > h3 {
+  position: relative;
+  top: 20%;
+  margin: 0 auto;
+}
+.kotakbesarataskiri {
+  position: relative;
+  z-index: 3;
+  height: 520px;
+}
+.kotak3 {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+}
+.kotak4 {
+  position: relative;
+  height: 25%;
+  width: 100%;
+}
+.kotak5 {
+  position: absolute;
+  z-index: 5;
+  width: 20%;
+  height: 100%;
+  left: 0;
+  right: 75%;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotak5 > h3 {
+  position: absolute;
+  top: 62%;
+  bottom: 0;
+  left: 35%;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.kotak5 > img {
+  transform: scaleX(-1);
+  top: 30%;
+  position: absolute;
+}
+.kotaknama {
+  position: absolute;
+  z-index: 5;
+  width: 30%;
+  height: 90%;
+  left: 0;
+  right: 48%;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotak6 {
+  position: relative;
+  height: 15%;
+  width: 100%;
+}
+.kotakstuden {
+  position: absolute;
+  z-index: 5;
+  width: 40%;
+  height: 90%;
+  left: 0;
+  right: 38%;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotak7 {
+  position: absolute;
+  z-index: 5;
+  width: 20%;
+  height: 75%;
+  left: 0;
+  right: 58%;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.kotakbuton {
+  position: absolute;
+  z-index: 10;
+  background-color: rgb(109, 200, 253);
+  border-radius: 20px;
+  width: 100%;
+}
+.kotakbuton > h2 {
+  margin: 10px;
+  color: #fff;
+}
+.kotak8 {
+  position: relative;
+  z-index: 0;
+  height: 20%;
+  width: 100%;
+}
+.kotak9 {
+  position: absolute;
+  z-index: 5;
+  width: 20%;
+  height: 70%;
+  left: 0;
+  right: 68%;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotak10 {
+  position: absolute;
+  z-index: 5;
+  width: 20%;
+  height: 70%;
+  left: 28%;
+  right: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotak11 {
+  position: relative;
+  height: 85%;
+  width: 100%;
+}
+.kotakprofil {
+  position: absolute;
+  z-index: 5;
+  width: 40%;
+  height: 70%;
+  left: 0;
+  right: 48%;
+  top: 0;
+  bottom: 10%;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotakinfo {
+  position: absolute;
+  z-index: 5;
+  width: 40%;
+  height: 70%;
+  left: 48%;
+  right: 0;
+  top: 0;
+  bottom: 10%;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotak12 {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+}
+.kotak13 {
+  position: relative;
+  height: 50%;
+  width: 100%;
+}
+.kotaksekolah {
+  position: absolute;
+  z-index: 5;
+  width: 70%;
+  height: 85%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 23px;
+}
+.kotaktextsekolah {
+  padding-left: 30px;
+  margin: 20px;
+}
+.kotak14 {
+  position: absolute;
+  z-index: 5;
+  width: 75%;
+  height: 85%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kotak15 {
+  position: relative;
+  height: 30%;
+  width: 100%;
+}
+.h3skill {
+  position: relative;
+  margin: 0;
+  top: 100%;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.barskill {
+  position: relative;
+  height: 5px;
+  border-width: 0;
+  width: 30%;
+  background-color: black;
+  bottom: 20%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.garisskill {
+  position: relative;
+  height: 2px;
+  border-width: 0;
+  width: 100%;
+  background-color: black;
+  bottom: 20%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.kotakskill {
+  position: relative;
+  height: 70%;
+  width: 100%;
+}
+.kotakbawah {
+  position: relative;
+  height: 100%;
+}
+.kotakbawahkiri {
+  position: relative;
+  width: 75%;
+  height: 100%;
+  padding: 0;
+  text-align: center;
+}
+.kotakbawahkiri > hr {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+.kotakbawahkanan {
+  position: relative;
+  width: 25%;
+  height: 100%;
+  padding: 0;
+}
+.primari {
+  background-color: aqua;
+  color: aqua;
+}
+.sekondari {
+  background-color: #f2eef0;
+}
+.warna {
+  background-color: rgb(206, 255, 246);
+}
+.header {
+  width: 100%;
+  height: 100px;
+  /* margin: 0 auto; */
+  /* padding: 10px; */
+  position: relative;
+}
+.tengah {
+  width: 10%;
+  height: 300px;
+  margin: 0 auto;
+  /* padding: 10px; */
+  position: relative;
+}
+.baris {
+  display: flex;
+}
+.kolom {
+  flex: auto;
+  padding: 10px;
+}
+.sampingkanan {
+  height: 620px;
+  width: 26%;
+}
+.abu {
+  background-color: #d9d9d9;
+}
