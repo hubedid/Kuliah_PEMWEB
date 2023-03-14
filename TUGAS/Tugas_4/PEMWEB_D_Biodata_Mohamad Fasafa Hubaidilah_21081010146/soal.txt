@@ -1,0 +1,4 @@
+buatlah program PHP untuk melakukan koneksi dan menampilkan data dari database. dengan ketentuan:
+
+data menggunakan data yang telah disediakan di database
+buatlah program yang dapat menampilkan dari dua table yaitu tabel customers dan products
