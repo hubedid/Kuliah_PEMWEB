@@ -1,6 +1,6 @@
 <?php
 require("Product.php");
-require("cdMusic.php");
+require("CDMusic.php");
 require("CDRack.php");
 // Class Product
 echo "------------------- Class Product : -------------------";
