@@ -17,7 +17,7 @@ echo "\n--------------------------------------------------------";
 // Class CDMusic
 echo "\n\n------------------- Class CDMusic ----------------------";
 $cdMusic = new cdMusic("Siang Sebrang Sebuah Istana");
-echo "\nNama cdMusic : " . $cdMusic->getName();
+echo "\nNama CDMusic : " . $cdMusic->getName();
 $cdMusic->setArtist("Iwan Fals");
 echo "\nArtist : " . $cdMusic->getArtist();
 $cdMusic->setGenre("Country");
