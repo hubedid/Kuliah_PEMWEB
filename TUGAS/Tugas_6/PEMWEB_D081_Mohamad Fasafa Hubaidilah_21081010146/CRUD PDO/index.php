@@ -2,7 +2,7 @@
   //memanggil file conn.php yang berisi koneski ke database
   //dengan include, semua kode dalam file conn.php dapat digunakan pada file index.php
   include ('conn.php');
-  $table = $_GET['table'];
+  $table = isset($_GET['table']) ? $_GET['table'] : "customers";
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,8 +25,8 @@
             <ul class="nav flex-column" style="margin-top:100px;">
               <?php 
                 $qTable = "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA='$dbName'";
-                $rTable = mysqli_query(connection(),$qTable);
-                while ($rowTable = mysqli_fetch_array($rTable)) {
+                $rTable = $conn->query($qTable);
+                while ($rowTable = $rTable->fetch(PDO::FETCH_ASSOC)) {
               ?>
                 <li class="nav-item">
                   <a class="nav-link <?php echo $rowTable['TABLE_NAME'] == $table ? "active" : "" ?>" href="<?php echo "index.php?table=$rowTable[TABLE_NAME]"; ?>">Data <?php echo ucwords($rowTable['TABLE_NAME']) ?></a>
@@ -66,19 +66,16 @@
                 <tr>
                   <?php
                     $q = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = '$table'";
-                    $r = mysqli_query(connection(),$q);
+                    // $r = mysqli_query(connection(),$q);
+                    $r = $conn->query($q);
                     $kolom = array();
-                    while($row = mysqli_fetch_array($r)){
+                    while($row = $r->fetch(PDO::FETCH_ASSOC)){
                       $kolom[] = $row;
                     }
                     foreach($kolom as $atribut){ 
                       $qCekFk = "SELECT REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='$dbName' AND TABLE_NAME='$table' AND COLUMN_NAME='$atribut[COLUMN_NAME]' AND REFERENCED_TABLE_NAME IS NOT NULL";
-                      $rCekFk = mysqli_query(connection(),$qCekFk);
-                      $rowCek = mysqli_fetch_array($rCekFk);
-                      // $qCekFk .=
-                      // $qCekFk .=
-                      // $qCekFk .=
-                      // var_dump($rowCek == null);
+                      $rCekFk = $conn->query($qCekFk);
+                      $rowCek = $rCekFk->fetch(PDO::FETCH_ASSOC);
                       ?>
                       <th><?= ucwords(preg_replace("([A-Z])", " $0", $atribut['COLUMN_NAME'])) ?></th>
                   <?php } ?>
@@ -90,12 +87,12 @@
                   //proses menampilkan data dari database:
                   //siapkan query SQL
                   $q = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = '$table'";
-                  $r = mysqli_query(connection(),$q);
+                  $r = $conn->query($q);
                   $query = "SELECT * FROM $table";
-                  $result = mysqli_query(connection(),$query);
-                 ?>
+                  $result = $conn->query($query);
+                  ?>
 
-                 <?php while($data = mysqli_fetch_array($result)): ?>
+                 <?php while($data = $result->fetch(PDO::FETCH_ASSOC)): ?>
                   <tr>
                     <?php foreach($kolom as $atribut){?>
                         <td><?php echo $data[$atribut['COLUMN_NAME']];  ?></td>

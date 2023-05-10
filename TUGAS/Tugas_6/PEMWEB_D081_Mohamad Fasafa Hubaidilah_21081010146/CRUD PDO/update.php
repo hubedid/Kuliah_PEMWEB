@@ -6,8 +6,8 @@
   $status = '';
   $result = '';
   $q = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = '$table'";
-  $r = mysqli_query(connection(),$q);
-  $atributKolom = mysqli_fetch_array($r);
+  $r = $conn->query($q);
+  $atributKolom = $r->fetch(PDO::FETCH_ASSOC);
   //melakukan pengecekan apakah ada variable GET yang dikirim
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       if (isset($_GET[$atributKolom['COLUMN_NAME']])) {
@@ -16,41 +16,29 @@
           $query = "SELECT * FROM $table WHERE $atributKolom[COLUMN_NAME] = '$id'";
 
           //eksekusi query
-          $result = mysqli_query(connection(),$query);
+          $result = $conn->query($query);
       }
   }
 
   //melakukan pengecekan apakah ada form yang dipost
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $kueri = array();
-      while ($atribut = mysqli_fetch_array($r)) {
+      while ($atribut = $r->fetch(PDO::FETCH_ASSOC)) {
         // ${$atribut['COLUMN_NAME']} = $_POST[$atribut['COLUMN_NAME']];
         $kueri[] = $atribut['COLUMN_NAME']."='".$_POST[$atribut['COLUMN_NAME']];
       }
       
       $sql = "UPDATE $table SET "; 
       $sql .= implode("', ",$kueri);
-      // $where = $atribut['COLUMN_NAME']."='".$_GET[$atribut['COLUMN_NAME']]."'";
       $sql .= "' WHERE ";
       $sql .= $atributKolom['COLUMN_NAME']."='".$_GET[$atributKolom['COLUMN_NAME']]."'";
-      //query SQL
-      // echo $sql;
-      // $sql = "UPDATE $table SET nama='$nama', jenis_kelamin='$jenis_kelamin', alamat='$alamat' WHERE nrp='$nrp'";
 
-      //eksekusi query
-      // $result = mysqli_query(connection(),$sql);
       try{
-        $result = mysqli_query(connection(),$sql);
+        $result = $conn->query($sql);
         $status = 'ok';
       }catch(Exception $e){
         $status = $e->getMessage();
       }
-      // if ($result) {
-      //   $status = 'ok';
-      // }
-      // else{
-      //   $status = 'err';
-      // }
 
       //redirect ke halaman lain
       header('Location: index.php?table='.$table.'&status='.$status);
@@ -91,18 +79,13 @@
         <h2 style="margin: 30px 0 30px 0;">Update <?php echo ucwords($table) ?></h2>
           <form action="" method="POST">
             <?php 
-              // $q = "SELECT * FROM customers";
               $q = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = '$table'";
-              $r = mysqli_query(connection(),$q);
-              // $kolom = [];
-              while($data = mysqli_fetch_array($result)){
-                while ($atribut = mysqli_fetch_array($r)) {
-              //   $kolom[] = $atribut;
-              // }
-              // foreach($kolom as $atribut){ 
+              $r = $conn->query($q);
+              while($data = $result->fetch(PDO::FETCH_ASSOC)){
+                while ($atribut = $r->fetch(PDO::FETCH_ASSOC)) {
                 $qCekFk = "SELECT REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='$dbName' AND TABLE_NAME='$table' AND COLUMN_NAME='$atribut[COLUMN_NAME]' AND REFERENCED_TABLE_NAME IS NOT NULL";
-                $rCekFk = mysqli_query(connection(),$qCekFk);
-                $rowCek = mysqli_fetch_array($rCekFk);
+                $rCekFk = $conn->query($qCekFk);
+                $rowCek = $rCekFk->fetch(PDO::FETCH_ASSOC);
                 if($rowCek != NULL){ ?>
                   <div class="form-group">
                     <label><?php echo ucwords(preg_replace("([A-Z])", " $0", $atribut['COLUMN_NAME'])); ?></label>
@@ -110,8 +93,8 @@
                       <option disabled selected>Pilih Salah Satu</option>
                       <?php 
                         $qDropdown = "SELECT * FROM $rowCek[REFERENCED_TABLE_NAME]";
-                        $rDropdown = mysqli_query(connection(),$qDropdown);
-                        while ($rowDropdown = mysqli_fetch_array($rDropdown)) {?>
+                        $rDropdown = $conn->query($qDropdown);
+                        while ($rowDropdown = $rDropdown->fetch(PDO::FETCH_ASSOC)) {?>
                           <option value="<?php echo $rowDropdown[$rowCek['REFERENCED_COLUMN_NAME']]; ?>" <?php echo $data[$atribut['COLUMN_NAME']]==$rowDropdown[$rowCek['REFERENCED_COLUMN_NAME']] ? "selected" : "" ?> ><?php echo $rowDropdown[$rowCek['REFERENCED_COLUMN_NAME']]; ?></option>
                         <?php } ?>
                     </select>

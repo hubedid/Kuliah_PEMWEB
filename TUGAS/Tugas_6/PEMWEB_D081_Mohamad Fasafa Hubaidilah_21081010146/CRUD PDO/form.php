@@ -7,9 +7,9 @@
   //melakukan pengecekan apakah ada form yang dipost
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $q = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = '$table'";
-    $r = mysqli_query(connection(),$q);
+    $r = $conn->query($q);
     $kueri = array();
-    while ($row = mysqli_fetch_array($r)) {
+    while ($row = $r->fetch(PDO::FETCH_ASSOC)) {
       // ${$row['COLUMN_NAME']} = $_POST[$row['COLUMN_NAME']];
       $kueri[] = $_POST[$row['COLUMN_NAME']];
     }
@@ -17,11 +17,9 @@
     $query = "INSERT INTO $table VALUES('"; 
     $query .= implode("','",$kueri);
     $query .= "')";
-    echo $query;
-    $result = mysqli_query(connection(),$query);
 
     try{
-      $result = mysqli_query(connection(),$query);
+      $result = $conn->query($query);
       $status = 'ok';
     }catch(Exception $e){
       $status = $e->getMessage();
@@ -51,8 +49,8 @@
             <ul class="nav flex-column" style="margin-top:100px;">
               <?php 
                 $qTable = "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA='$dbName'";
-                $rTable = mysqli_query(connection(),$qTable);
-                while ($rowTable = mysqli_fetch_array($rTable)) {
+                $rTable = $conn->query($qTable);
+                while ($rowTable = $rTable->fetch(PDO::FETCH_ASSOC)) {
               ?>
                 <li class="nav-item">
                   <a class="nav-link <?php echo $rowTable['TABLE_NAME'] == $table ? "active" : "" ?>" href="<?php echo "index.php?table=$rowTable[TABLE_NAME]"; ?>">Data <?php echo ucwords($rowTable['TABLE_NAME']) ?></a>
@@ -76,17 +74,13 @@
           <h2 style="margin: 30px 0 30px 0;">Form <?php echo ucwords($table) ?></h2>
           <form action="" method="POST">
             <?php 
-              // $q = "SELECT * FROM customers";
               $q = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '$dbName' AND TABLE_NAME = '$table'";
-              $r = mysqli_query(connection(),$q);
+              $r = $conn->query($q);
               $kolom = [];
-              while ($row = mysqli_fetch_array($r)) {
-              //   $kolom[] = $row;
-              // }
-              // foreach($kolom as $atribut){ 
+              while ($row = $r->fetch(PDO::FETCH_ASSOC)) {
                 $qCekFk = "SELECT REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='$dbName' AND TABLE_NAME='$table' AND COLUMN_NAME='$row[COLUMN_NAME]' AND REFERENCED_TABLE_NAME IS NOT NULL";
-                $rCekFk = mysqli_query(connection(),$qCekFk);
-                $rowCek = mysqli_fetch_array($rCekFk);
+                $rCekFk = $conn->query($qCekFk);
+                $rowCek = $rCekFk->fetch(PDO::FETCH_ASSOC);
                 if($rowCek != NULL){ ?>
                   <div class="form-group">
                     <label><?php echo ucwords(preg_replace("([A-Z])", " $0", $row['COLUMN_NAME'])); ?></label>
@@ -94,8 +88,8 @@
                       <option disabled selected>Pilih Salah Satu</option>
                       <?php 
                         $qDropdown = "SELECT * FROM $rowCek[REFERENCED_TABLE_NAME]";
-                        $rDropdown = mysqli_query(connection(),$qDropdown);
-                        while ($rowDropdown = mysqli_fetch_array($rDropdown)) {?>
+                        $rDropdown = $conn->query($qDropdown);
+                        while ($rowDropdown = $rDropdown->fetch(PDO::FETCH_ASSOC)) {?>
                           <option value="<?php echo $rowDropdown[$rowCek['REFERENCED_COLUMN_NAME']]; ?>"><?php echo $rowDropdown[$rowCek['REFERENCED_COLUMN_NAME']]; ?></option>
                         <?php } ?>
                     </select>

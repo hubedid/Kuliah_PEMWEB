@@ -1,19 +1,16 @@
 <?php 
-$dbName = "classicmodels";
-function connection($dbName = "classicmodels") {
-   // membuat konekesi ke database system
    $dbServer = 'localhost';
-   $dbPort = 3305;
    $dbUser = 'root';
    $dbPass = '';
-   
-   $conn = mysqli_connect($dbServer, $dbUser, $dbPass, $dbName, $dbPort);
+   $dbName = "classicmodels";
 
-   if(! $conn) {
-	die('Koneksi gagal: ' . mysqli_error());
+   try {
+      //membuat object PDO untuk koneksi ke database
+      $conn = new PDO("mysql:host=$dbServer;dbname=$dbName", $dbUser, $dbPass);
+      // setting ERROR mode PDO: ada tiga mode error mode silent, warning, exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
    }
-   //memilih database yang akan dipakai
-   // mysqli_select_db($conn,$dbName);
-	
-   return $conn;
-}
+   catch(PDOException $err)
+   {
+      echo "Failed Connect to Database Server : " . $err->getMessage();
+   }
