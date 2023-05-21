@@ -1,0 +1,10 @@
+crud dengan file
+buku perpus
+1 kode buku
+2 judul
+3 pengarang
+4 tahun terbit
+5 jumlah halaman
+6 penerbit
+7 kategori
+8 kover -> image
